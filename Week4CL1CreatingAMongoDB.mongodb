@@ -1,0 +1,111 @@
+/*1. Create a database in MongoDB of your choice.*/
+use('classiccarshop') /*Note: no semicolon terminator necessary for single command.*/
+
+
+/*2. Create 3 Collections.*/
+use('classiccarshop')
+db.createCollection('cars');
+use('classiccarshop')
+db.createCollection('customers');
+use('classiccarshop')
+db.createCollection('orders');
+
+/*3. Insert at least 10 documents into each collection.*/
+/*Note: curly brackets{} used for documents, square brackets[] used for arrays.*/
+use('classiccarshop')
+db.cars.insertMany([
+  { 'car_id': 100000, 'brand': 'Ford', 'name': 'Mustang Shelby Cobra GT500', 'year_built': 1968, 'horsepower': 400, 'price(£s)': 150000 },
+  { 'car_id': 100001, 'brand': 'DMC', 'name': 'DeLorean', 'year_built': 1981, 'horsepower': 130, 'price(£s)': 50000 },
+  { 'car_id': 100002, 'brand': 'Volkswagen', 'name': 'Golf GTI', 'year_built': 1976, 'horsepower': 110, 'price(£s)': 10000 },
+  { 'car_id': 100003, 'brand': 'Reliant', 'name': 'Robin', 'year_built': 1973, 'horsepower': 40, 'price(£s)': 4000 },
+  { 'car_id': 100004, 'brand': 'Honda', 'name': 'City Turbo II', 'year_built': 1983, 'horsepower': 110, 'price(£s)': 17200 },
+  { 'car_id': 100005, 'brand': 'Lamborghini', 'name': 'Countach 5000 QV', 'year_built': 1985, 'horsepower': 455, 'price(£s)': 465000 },
+  { 'car_id': 100006, 'brand': 'Toyota', 'name': 'AE86 Corolla', 'year_built': 1983, 'horsepower': 128, 'price(£s)': 49500 },
+  { 'car_id': 100007, 'brand': 'Honda', 'name': 'CRX', 'year_built': 1986, 'horsepower': 125, 'price(£s)': 14000 },
+  { 'car_id': 100008, 'brand': 'Peugeot', 'name': '504', 'year_built': 1979, 'horsepower': 80, 'price(£s)': 11000 },
+  { 'car_id': 100009, 'brand': 'Austin', 'name': 'Mini Cooper', 'year_built': 1961, 'horsepower': 55, 'price(£s)': 9000 },
+]);
+
+use('classiccarshop')
+db.customers.insertMany([
+  { 'customer_id': 200000, 'first_name': 'Liam', 'surname': 'Hobbs', 'address': '27 Merthyr Road', 
+    'town': 'Burlescombe', 'email': 'liamhobbs@jourrapide.com' },
+  { 'customer_id': 200001, 'first_name': 'Alice', 'surname': 'Smith', 'address': '1 Granville Pastures', 
+    'town': 'Brighton', 'email': 'alicesmith@protonmail.com' },  
+  { 'customer_id': 200002, 'first_name': 'Bob', 'surname': 'Brown', 'address': '26 Skellow Hall Gardens', 
+    'town': 'Lichfield', 'email': 'bobbrown@hotmail.com' },  
+  { 'customer_id': 200003, 'first_name': 'Charles', 'surname': 'Franklin', 'address': '32 Hazelwood Lane', 
+    'town': 'Stoke-On-Trent', 'email': 'cfranklin@yahoo.com' },  
+  { 'customer_id': 200004, 'first_name': 'David', 'surname': 'Jones', 'address': '2 Chaucer Rise', 
+    'town': 'Chichester', 'email': 'davidjones@btinternet.com' },  
+  { 'customer_id': 200005, 'first_name': 'Ethan', 'surname': 'Yates', 'address': '74 Flowerpot Close', 
+    'town': 'Truro', 'email': 'ethanyates@aol.com' },
+  { 'customer_id': 200006, 'first_name': 'Ellis', 'surname': 'Higgins', 'address': '49 Balsham Road', 
+    'town': 'Harthill', 'email': 'ellishiggins@dayrep.com' },
+  { 'customer_id': 200007, 'first_name': 'Leo', 'surname': 'Savage', 'address': '75 Fore Street', 
+    'town': 'Troon', 'email': 'leosavage@rhyta.com' },
+  { 'customer_id': 200008, 'first_name': 'Sean', 'surname': 'Pearce', 'address': '9 Hexham Road', 
+    'town': 'Inworth', 'email': 'seanpearce@gmail.com' },
+  { 'customer_id': 200009, 'first_name': 'Hayden', 'surname': 'Gordon', 'address': '92 St Dunstans Street', 
+    'town': 'Warrington', 'email': 'haydengordon@jourrapide.com' },
+]);
+
+/*Note: new Date() returns the current date as a Date object. mongosh wraps the Date object with the ISODate helper. 
+The ISODate is in UTC.*/
+use('classiccarshop')
+db.orders.insertMany([
+  { 'order_id': 300000, 'customer_id': 200000, 'car_id': 100000, 'date_of_purchase': new Date(),
+    'billing_address': '27 Merthyr Road', 'town': 'Burlescombe' },
+  { 'order_id': 300001, 'customer_id': 200001, 'car_id': 100001, 'date_of_purchase': new Date(),
+    'billing_address': '1 Granville Pastures', 'town': 'Brighton' },  
+  { 'order_id': 300002, 'customer_id': 200002, 'car_id': 100002, 'date_of_purchase': new Date(),
+    'billing_address': '26 Skellow Hall Gardens', 'town': 'Lichfield' },  
+  { 'order_id': 300003, 'customer_id': 200003, 'car_id': 100003, 'date_of_purchase': new Date(),
+    'billing_address': '32 Hazelwood Lane', 'town': 'Stoke-On-Trent' },  
+  { 'order_id': 300004, 'customer_id': 200004, 'car_id': 100004, 'date_of_purchase': new Date(),
+    'billing_address': '2 Chaucer Rise', 'town': 'Chichester' },  
+  { 'order_id': 300005, 'customer_id': 200005, 'car_id': 100005, 'date_of_purchase': new Date(),
+    'billing_address': '74 Flowerpot Close', 'town': 'Truro' },
+  { 'order_id': 300006, 'customer_id': 200006, 'car_id': 100006, 'date_of_purchase': new Date(),
+    'billing_address': '49 Balsham Road', 'town': 'Harthill' },
+  { 'order_id': 300007, 'customer_id': 200007, 'car_id': 100007, 'date_of_purchase': new Date(),
+    'billing_address': '75 Fore Street', 'town': 'Troon' },
+  { 'order_id': 300008, 'customer_id': 200008, 'car_id': 100008, 'date_of_purchase': new Date(),
+    'billing_address': '9 Hexham Road', 'town': 'Inworth' },
+  { 'order_id': 300009, 'customer_id': 200009, 'car_id': 100009, 'date_of_purchase': new Date(),
+    'billing_address': '92 St Dunstans Street', 'town': 'Warrington' },
+]);
+
+/*Checking documents in collections.*/
+use('classiccarshop')
+db.cars.find(); 
+use('classiccarshop')
+db.customers.find();
+use('classiccarshop')
+db.orders.find();
+
+/*4. Search for one document passed on an index.*/
+use('classiccarshop')
+db.getCollection('cars')
+  .find(
+    {
+    'car_id': 100000
+    }
+  )
+;
+
+/*5. Update a collection.*/
+use('classiccarshop')
+db.cars.updateOne(
+  {'car_id': 100000, 
+   'brand': 'Ford', 
+   'name': 'Mustang Shelby Cobra GT500'
+  },
+  {$set: {'price(£s)': 140000}}
+);
+
+/*6. Delete a collection.*/
+use('classiccarshop')
+db.getCollection('orders').drop();
+
+

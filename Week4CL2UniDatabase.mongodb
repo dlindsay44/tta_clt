@@ -1,0 +1,53 @@
+/*1. Find all the documents from
+the student collection which
+CourseID 4.*/
+use('uni')
+db.getCollection('student')
+  .find(
+    {
+    'CourseID': 4
+    }
+  )
+;
+
+/*2. Find all the documents from
+the student collection which
+CourseID 5 and Forenames is
+Joe.*/
+use('uni')
+db.getCollection('student')
+  .find(
+    {
+    'CourseID': 5,
+    'Forenames': 'Joe'
+    }
+  )
+;
+
+/*3. Find all the documents from
+the student collection which
+CourseID 5 or Firstname is Joe.*/
+use('uni')
+db.getCollection('student')
+  .find({$or: [{'CourseID': 5},  {'Forenames': 'Joe'}]}
+  )
+;
+
+/*4. Find all documents from the
+application collection and sort
+by studentID.*/
+DBQuery.shellBatchSize = 300 // Allows returning more than 20 documents.
+use('uni')
+db.getCollection('application')
+  .find()
+    .sort({
+    'StudentID': 1 // Ascending. Use -1 for descending.
+    })
+;
+
+/*5. In the class collection, count
+the number of LecturerID
+which is equal to 11.*/
+use('uni')
+db.class.count({'LecturerID': 11});
+
