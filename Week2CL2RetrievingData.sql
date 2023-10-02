@@ -1,3 +1,4 @@
+USE uni;
 --Obtain all information on the students not attending course 1
 SELECT * FROM student 
 WHERE CourseID <> 1;
